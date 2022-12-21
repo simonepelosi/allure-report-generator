@@ -1,5 +1,5 @@
 {% macro render_attachments(attachments, path) -%}
     {% for attachment in attachments %}
-        <img src="file://{{path + '/' + attachment['source']}}" style="WIDTH:auto; HEIGHT:350px"/>
+        <img src="{{'static/' + attachment['source']}}" style="WIDTH:auto; HEIGHT:350px"/>
     {% endfor %}
 {%- endmacro %}
