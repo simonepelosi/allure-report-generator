@@ -1,0 +1,16 @@
+{% from 'attachment_macro.j2' import render_attachments %}
+
+{% macro render_steps(steps, path) -%}
+    <ul>
+    {% for step in steps %}
+        <li>
+        <p> {{step['name'].capitalize()}} - {{step['status']}}</p>
+        {% if step['statusDetails'] and step['statusDetails']['message'] %}
+        <p class="red">Error code= {{step['statusDetails']['message']}}</p>
+        {% endif %}
+        {{ render_attachments(step['attachments'], path) }}
+        {{ render_steps(step['steps'], path) }}
+        </li>
+    {% endfor %}
+    </ul>
+{%- endmacro %}

@@ -1,0 +1,57 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Report</title>
+    <style>
+        body{
+	        font-family: Arial, Helvetica, sans-serif;
+        }
+        .red {
+            color: red;
+        }
+        .green {
+            color: lawngreen;
+        }
+        .yellow {
+            color: yellow;
+        }
+    </style>
+</head>
+<body>
+{% block body %}
+    {% from 'step_macro.j2' import render_steps %}
+    {% from 'attachment_macro.j2' import render_attachments %}
+
+    <h1 style="text-align: center"> Test Report</h1>
+    <div style="width: 60%;padding: 10px;margin: auto">
+        <img src="{{summary}}"/>
+    </div>
+
+
+    {% for test in tests %}
+    <div>
+        <h1 class="{{ 'green' if test['status'].upper() == 'PASSED' else 'red' if test['status'].upper() == 'BROKEN' else 'yellow'}}" style="text-align: center">{{ test['name'] + ' - ' + test['status'].upper()}}</h1>
+
+        {% for label in test['labels'] %}
+        <p> {{label['name'].capitalize()}} = {{label['value']}}</p>
+        {% endfor %}
+
+        {% if test['statusDetails']['message'] %}
+        <p class="red">Error code= {{test['statusDetails']['message']}}</p>
+        {% endif %}
+
+        {% if test['steps'] %}
+        <h3 style="text-align: center"> Steps: </h3>
+        {{render_steps(test['steps'], path)}}
+        {% endif %}
+        {% if test['attachments'] %}
+        <h3 style="text-align: center"> Test attachments: </h3>
+        {{render_attachments(test['attachments'], path)}}
+        {% endif %}
+    </div>
+    <h1 style="text-align: center;color: gray">#################################################################</h1>
+
+    {% endfor %}
+{% endblock %}
+</body>
+</html>
