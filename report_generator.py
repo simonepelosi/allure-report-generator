@@ -11,7 +11,9 @@ if __name__ == '__main__':
                            type=str,
                            help='Allure result path')
     my_parser.add_argument('-o', '--output', help='Output filename (default: index.html)')
-    my_parser.add_argument('-f', '--filters', help='Label filters')
+
+    # TODO: add filters
+    # my_parser.add_argument('-f', '--filters', help='Label filters')
 
     args = my_parser.parse_args()
 
