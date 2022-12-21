@@ -8,6 +8,9 @@ import jinja2
 def init():
     if not os.path.isdir('static'):
         os.mkdir('static')
+    else:
+        shutil.rmtree('static')
+        os.mkdir('static')
 
 
 def parse_tests(allure_path):
