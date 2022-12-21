@@ -11,6 +11,9 @@ if __name__ == '__main__':
 
     start = time.time()
 
+    if not os.path.isdir('static'):
+        os.mkdir('static')
+
     template_loader = jinja2.FileSystemLoader(searchpath="templates")
     template_env = jinja2.Environment(loader=template_loader)
 
