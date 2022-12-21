@@ -63,5 +63,3 @@ if __name__ == '__main__':
 
     print('HTML generated!')
     print('Time elapsed in seconds: ' + str(time.time()-start))
-    # html2pdf('html_report_jinja.html', 'html_report_jinja.pdf')
-    # print('PDF GENERATED!')
