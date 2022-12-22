@@ -16,6 +16,22 @@
             color: yellow;
         }
     </style>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable({{ summary }});
+
+        var options = {
+          title: 'Test summary',
+          pieHole: 0.4
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+      }
+    </script>
 </head>
 <body>
 {% block body %}
@@ -23,9 +39,9 @@
     {% from 'attachment_macro.j2' import render_attachments %}
 
     <h1 style="text-align: center"> Test Report</h1>
-    <div style="width: 60%;padding: 10px;margin: auto">
-        <img src="{{summary}}"/>
-    </div>
+	<div style="margin: auto;width: 60%">
+		<div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+	</div>
 
 
     {% for test in tests %}

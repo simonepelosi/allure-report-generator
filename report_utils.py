@@ -54,6 +54,15 @@ def generate_chart(summary):
     return chart_path
 
 
+def generate_google_chart(summary):
+    google_chart = [['Status', 'Tests']]
+
+    for key, value in summary.items():
+        google_chart.append([key.capitalize(), value])
+
+    return google_chart
+
+
 def render_template(out, results, report_path, chart_path):
     template_loader = jinja2.FileSystemLoader(searchpath="templates")
     template_env = jinja2.Environment(loader=template_loader)

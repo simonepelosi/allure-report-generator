@@ -20,8 +20,8 @@ if __name__ == '__main__':
     start = time.time()
 
     result, summary = report_utils.parse_tests(args.allure_result_path)
-    chart_path = report_utils.generate_chart(summary)
-    report_utils.render_template(args.output or 'index.html', result, summary, chart_path)
+    chart = report_utils.generate_google_chart(summary)
+    report_utils.render_template(args.output or 'index.html', result, summary, chart)
 
     print('HTML generated!')
     print('Time elapsed in seconds: ' + str(time.time() - start))
